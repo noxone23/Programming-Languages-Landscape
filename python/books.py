@@ -14,17 +14,29 @@ class Book:
     notes: str
 
 
-# TODO: the label of every status, see SPEC.md
-STATUS_LABELS: Dict[str, str] = {}
+STATUS_LABELS: Dict[str, str] = {
+    "want-to-read": "Want to read",
+    "reading": "Reading",
+    "done": "Done",
+}
 
 
 def filter_books(books: List[Book], status: str, query: str) -> List[Book]:
     """status is "want-to-read", "reading", "done" or "all"."""
-    # TODO: implement, see SPEC.md
-    raise NotImplementedError("filter_books")
+    normalized_query = query.strip().lower()
+    result: List[Book] = []
+    for book in books:
+        status_matches = status == "all" or book.status == status
+        if status_matches and normalized_query in book.title.lower():
+            result.append(book)
+    return result
 
 
 def validate_book(title: str, author: str) -> Dict[str, str]:
     """Returns an error message per invalid field. An empty dict means valid."""
-    # TODO: implement, see SPEC.md
-    raise NotImplementedError("validate_book")
+    errors: Dict[str, str] = {}
+    if title.strip() == "":
+        errors["title"] = "Title is required"
+    if author.strip() == "":
+        errors["author"] = "Author is required"
+    return errors
