@@ -1,12 +1,13 @@
 # Reading List Logic Port
 
-Port the logic of the Reading List from TypeScript to Python 3. Read `README.md` and `SPEC.md` before you do anything.
+Port the logic of the Reading List from TypeScript to Python 3 (done) and then to Go (second language). Read `README.md` and `SPEC.md` before you do anything.
 
-I work **only** in the folder `python`. The folder `typescript` is the reference and read-only. The file `fixtures/cases.json` is shared by all languages and read-only.
+I work **only** in the folder `python`, and for the second language only in the folder `go`. The folder `typescript` is the reference and read-only. The file `fixtures/cases.json` is shared by all languages and read-only.
 
 ## Commands
 
 - Python, in `python`: `python3 -m unittest` (on Windows: `python -m unittest`)
+- Go, in `go`: `go test` (and `go vet`, `gofmt -l .`)
 - Reference, in `typescript`: `node --test`
 
 ## Rules
@@ -27,3 +28,7 @@ I work **only** in the folder `python`. The folder `typescript` is the reference
 ### Python 3
 
 - Python 3.9 compatible. Type hints on all functions, `dataclass` for the book, standard library only.
+
+### Go
+
+- Package `readinglist`, `gofmt` formatted, the code passes `go vet`. Return an empty slice, not `nil`, for no result. No `panic` in the final code.
