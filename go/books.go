@@ -2,6 +2,8 @@
 // (see ../typescript/books.ts and ../SPEC.md).
 package readinglist
 
+import "strings"
+
 // Book is one book of the reading list.
 type Book struct {
 	ID     string `json:"id"`
@@ -13,19 +15,35 @@ type Book struct {
 }
 
 // StatusLabels maps every status to its label.
-// TODO: fill in the label of every status, see SPEC.md
-var StatusLabels = map[string]string{}
+var StatusLabels = map[string]string{
+	"want-to-read": "Want to read",
+	"reading":      "Reading",
+	"done":         "Done",
+}
 
 // FilterBooks returns the books with the given status that match the query.
 // status is "want-to-read", "reading", "done" or "all".
 func FilterBooks(books []Book, status string, query string) []Book {
-	// TODO: implement, see SPEC.md
-	panic("TODO: FilterBooks")
+	normalizedQuery := strings.ToLower(strings.TrimSpace(query))
+	result := []Book{}
+	for _, book := range books {
+		statusMatches := status == "all" || book.Status == status
+		if statusMatches && strings.Contains(strings.ToLower(book.Title), normalizedQuery) {
+			result = append(result, book)
+		}
+	}
+	return result
 }
 
 // ValidateBook returns an error message per invalid field ("title", "author").
 // An empty map means valid.
 func ValidateBook(title string, author string) map[string]string {
-	// TODO: implement, see SPEC.md
-	panic("TODO: ValidateBook")
+	errors := map[string]string{}
+	if strings.TrimSpace(title) == "" {
+		errors["title"] = "Title is required"
+	}
+	if strings.TrimSpace(author) == "" {
+		errors["author"] = "Author is required"
+	}
+	return errors
 }
