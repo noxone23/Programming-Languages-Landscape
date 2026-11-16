@@ -1,17 +1,12 @@
 # Reading List Logic Port
 
-Port the logic of the Reading List from TypeScript to <!-- TODO: Python 3 | Java | Go | Rust -->. Read `README.md` and `SPEC.md` before you do anything.
+Port the logic of the Reading List from TypeScript to Python 3. Read `README.md` and `SPEC.md` before you do anything.
 
-I work **only** in the folder <!-- TODO: python | java | go | rust -->. The folder `typescript` is the reference and read-only. The file `fixtures/cases.json` is shared by all languages and read-only.
+I work **only** in the folder `python`. The folder `typescript` is the reference and read-only. The file `fixtures/cases.json` is shared by all languages and read-only.
 
 ## Commands
 
-<!-- TODO: Keep the commands of your language, delete the others. Run them in the folder of the language. -->
-
-- Python, in `python`: `python3 -m unittest`
-- Java, in `java`: `javac -d out src/*.java` and then `java -cp out BooksTest`
-- Go, in `go`: `go test` (and `go vet`, `gofmt -l .`)
-- Rust, in `rust`: `cargo test` (and `cargo fmt`, `cargo clippy` if installed)
+- Python, in `python`: `python3 -m unittest` (on Windows: `python -m unittest`)
 - Reference, in `typescript`: `node --test`
 
 ## Rules
@@ -29,20 +24,6 @@ I work **only** in the folder <!-- TODO: python | java | go | rust -->. The fold
 
 ## Language rules
 
-<!-- TODO: Keep the section of my language, delete the others. -->
-
 ### Python 3
 
 - Python 3.9 compatible. Type hints on all functions, `dataclass` for the book, standard library only.
-
-### Java
-
-- JDK 17 or newer, the plain `javac` command, no build tool. Use `strip()` and `toLowerCase(Locale.ROOT)`. No `null` return values: return an empty list or map.
-
-### Go
-
-- Package `readinglist`, `gofmt` formatted, the code passes `go vet`. Return an empty slice, not `nil`, for no result. No `panic` in the final code.
-
-### Rust
-
-- Edition 2024, `cargo fmt` formatted. No `unwrap()` and no `clone()` of whole books in `filter_books` (it returns references), no `unsafe`.
